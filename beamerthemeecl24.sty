@@ -1,0 +1,126 @@
+%% Thème Beamer Latex cherchant à respecter la charte graphique de l'école centrale de Lyon 2024
+%% Auteur : Dr Charles-Edmond Bichot
+%% Licence CC BY-NC-ND 4.0 (https://creativecommons.org/licenses/by-nc-nd/4.0/)
+\ProvidesPackage{beamerthemeecl24}[2026/01/22]
+
+\mode<presentation>
+
+%% Chargement des extensions
+\RequirePackage{tikz}
+\RequirePackage{ifthen}
+\RequirePackage{etoolbox}
+
+%% Pour insérer la licence creative commons BY-NC-ND
+\newboolean{@ccbyncnd}
+\setboolean{@ccbyncnd}{false}
+
+%% Déclaration des options
+\DeclareOption{ccbyncnd}{
+  \setboolean{@ccbyncnd}{true}
+}
+\ProcessOptions\relax
+
+%% Images de fond
+\setbeamertemplate{background}{%
+  \begin{tikzpicture}[overlay,remember picture]%
+    \ifnumequal{\c@framenumber}{1}{%
+      % Page de garde
+      \node[opacity=1, at=(current page.center)] {%
+        \includegraphics[width=\paperwidth,height=\paperheight]{ECL-p1-43.pdf}};%
+    }{%
+      % Autres pages
+      \node at (10.2,-0.9) [opacity=1, anchor=west]{%
+        \includegraphics[width=2cm]{ECL.png}};%
+    }%
+    % Licence creative commons BY-NC-ND
+    \ifthenelse{\boolean{@ccbyncnd}}{%
+      \node (by) at (current page.north east)[opacity=1, anchor=north east]{%
+        \tiny\insertshortauthor~\includegraphics[width=1cm]{by-nc-nd.png}};}{}%
+  \end{tikzpicture}
+}
+
+% Page de garde
+\setbeamertemplate{title page}{%
+  \vskip3cm%
+  \begin{beamercolorbox}{title page}%
+    \textbf{\LARGE{\inserttitle}}\\[-1ex]%
+    \rule{3cm}{1pt}%
+  \end{beamercolorbox}%
+
+  \begin{beamercolorbox}{author}%
+    \vskip0.5ex%
+    \textbf{\large{\insertsubtitle}}%
+
+    \vskip2em%
+    \insertauthor%
+  
+    \vskip1em%
+    \insertdate%
+  \end{beamercolorbox}%
+}%
+
+% Titre(s) d'une page
+\defbeamertemplate*{frametitle}{ecl24}{%
+  \begin{beamercolorbox}[wd=\paperwidth, left, leftskip=0.2cm]{frametitle}%
+    \begin{minipage}[c][1.2cm][c]{9.6cm} %12.8cm x 9.6cm
+      \ifx\insertframesubtitle\@empty{%
+        {\large\hspace{-0ex}\insertframetitle\par\vspace{-1.6ex}\rule{3cm}{1pt}\par}%
+      }\else{%
+        {\large\hspace{-0ex}\insertframetitle\par\vspace{-1.6ex}\rule{3cm}{1pt}\par}%
+        {\normalsize\insertframesubtitle\par}%
+      }\fi%
+    \end{minipage}%
+  \end{beamercolorbox}%
+}%
+
+
+% Pied de page
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.3\paperwidth,left]{section in head/foot}%
+      \hspace*{2ex}\insertshorttitle%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.4\paperwidth,center]{section in head/foot}%
+      \insertauthor%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.3\paperwidth,right]{section in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+}
+
+%% Couleurs
+\definecolor{RougeECL}{RGB}{176,16,43}
+
+\setbeamercolor{structure}{fg=RougeECL}
+\setbeamercolor{alerted text}{fg=RougeECL}
+\setbeamercolor{example text}{fg=green!50!black}
+\setbeamercolor{normal text}{fg=black,bg=white}
+
+\setbeamercolor*{title page}{fg=RougeECL}
+\setbeamercolor*{author}{fg=black}
+
+%% Icône de début d'item
+\setbeamertemplate{itemize item}[ball]
+\setbeamertemplate{itemize subitem}[style]
+\setbeamertemplate{itemize subsubitem}[style]
+\setbeamertemplate{enumerate item}[ball]
+\setbeamertemplate{enumerate subitem}[ball]
+\setbeamertemplate{enumerate subsubitem}[ball]
+\setbeamertemplate{section in toc}[ball]
+\setbeamertemplate{subsection in toc}[ball]
+
+%% Blocs
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamercolor{block title}{fg=RougeECL, bg=RougeECL!15!white}
+\setbeamercolor{block body}{fg=black, bg=white}
+
+\setbeamercolor{block title alerted}{fg=white, bg=RougeECL}
+\setbeamercolor{block body alerted}{fg=black, bg=RougeECL!15!white}
+
+\setbeamercolor{block title example}{fg=green!30!black, bg=green!50!white}
+\setbeamercolor{block body example}{fg=black, bg=green!5!white}
+
+\mode<all>
+
+\endinput
