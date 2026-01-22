@@ -19,3 +19,8 @@ Pour utiliser la licence creative commons BY-NC-ND, activez l'option *ccbyncnd* 
 ```latex
 \usetheme[ccbyncnd]{ecl24}
 ```
+
+## Exemple de présentation
+Vous pouvez tester le thème *ecl24* avec le fichier [presentation.tex](https://github.com/cebecl/ThemeBeamerECL24/blob/main/presentation.tex).
+
+Cet exemple utilise [*lualetex*](https://www.luatex.org/), mais vous pouvez utiliser simplement *latex* ou *pdflatex* en commentant la ligne `\usepackage{luatextra}`
