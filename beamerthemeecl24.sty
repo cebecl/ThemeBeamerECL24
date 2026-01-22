@@ -21,6 +21,9 @@
 \setboolean{@finecl}{false}
 %% Le thème n'est disponible qu'au format 4:3 pour l'instant
 
+\newboolean{@footnotes}
+\setboolean{@footnotes}{true}
+
 %% Déclaration des options
 \DeclareOption{ccbyncnd}{
   \setboolean{@ccbyncnd}{true}
@@ -47,17 +50,18 @@
           \includegraphics[width=\paperwidth,height=\paperheight]{ECL-p1-43.pdf}};%
     }}{%
       \ifnumequal{\c@framenumber}{\inserttotalframenumber}{%
-        % Si on veut que la dernière page soit aux couleurs de l'école
-        \node[opacity=1, at=(current page.center)] {
-          \includegraphics[width=\paperwidth,height=\paperheight]{ECL-fin-43.pdf}};
+        \ifthenelse{\boolean{@finecl}}{%
+          % Si on veut que la dernière page soit aux couleurs de l'école
+          \node[opacity=1, at=(current page.center)] {
+            \includegraphics[width=\paperwidth,height=\paperheight]{ECL-fin-43.pdf}};}{}%
       }{% Autres pages
-      \node at (10.2,-0.9) [opacity=1, anchor=west]{%
-        \includegraphics[width=2cm]{ECL.png}};%
+        \node at (10.2,-0.9) [opacity=1, anchor=west]{%
+          \includegraphics[width=2cm]{ECL.png}};%
     }}%
   \end{tikzpicture}
 }
 
-% Page de garde
+%% Page de garde
 \setbeamertemplate{title page}{%
   \vskip3cm%
   \begin{beamercolorbox}{title page}%
@@ -77,7 +81,7 @@
   \end{beamercolorbox}%
 }%
 
-% Titre(s) d'une page
+%% Titre(s) d'une page
 \defbeamertemplate*{frametitle}{ecl24}{%
   \begin{beamercolorbox}[wd=\paperwidth, left, leftskip=0.2cm]{frametitle}%
     \begin{minipage}[c][1.2cm][c]{9.6cm} %12.8cm x 9.6cm
@@ -92,27 +96,42 @@
 }%
 
 
-% Pied de page
+%% Pied de page
 \setbeamertemplate{footline}{%
-  \ifnumequal{\c@framenumber}{1}{}{%
-    \ifnumequal{\c@framenumber}{\inserttotalframenumber}{}{%
-      \leavevmode%
-      \hbox{%
-        \begin{beamercolorbox}[wd=.3\paperwidth,left]{section in head/foot}%
-          \hspace*{2ex}\insertshorttitle%
-        \end{beamercolorbox}%
-        \begin{beamercolorbox}[wd=.4\paperwidth,center]{section in head/foot}%
-          \ifthenelse{\boolean{@ccbyncnd}}{%
-            % Licence creative commons BY-NC-ND
-            \insertshortauthor~\includegraphics[height=4ex]{by-nc-nd.png}%
-          }{%
-            \insertshortauthor%
-          }%
-        \end{beamercolorbox}%
-        \begin{beamercolorbox}[wd=.3\paperwidth,right]{section in head/foot}%
-          \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
-      \end{beamercolorbox}}%
-}}}%
+  \ifnumequal{\c@framenumber}{1}{%
+    % Pas de pied de page en première page
+    \setboolean{@footnotes}{false}%
+  }{%
+    \ifnumequal{\c@framenumber}{\inserttotalframenumber}{%
+      % Si dernière page
+      \ifthenelse{\boolean{@finecl}}{%
+        % Si option @finecl, pas de pied de page
+        \setboolean{@footnotes}{false}%
+      }{% Sinon, pied de page
+        \setboolean{@footnotes}{true}%
+    }}{%
+      % Par défaut, un pied de page
+      \setboolean{@footnotes}{true}%
+  }}%
+  \ifthenelse{\boolean{@footnotes}}{%
+    \leavevmode%
+    \hbox{%
+      \begin{beamercolorbox}[wd=.3\paperwidth,left]{section in head/foot}%
+        \hspace*{2ex}\insertshorttitle%
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.4\paperwidth,center]{section in head/foot}%
+        \ifthenelse{\boolean{@ccbyncnd}}{%
+          % Licence creative commons BY-NC-ND
+          \insertshortauthor~\includegraphics[height=4ex]{by-nc-nd.png}%
+        }{%
+          \insertshortauthor%
+        }%
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=.3\paperwidth,right]{section in head/foot}%
+        \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}}%
+  }{}
+}%
 
 %% Couleurs
 \definecolor{RougeECL}{RGB}{176,16,43}
