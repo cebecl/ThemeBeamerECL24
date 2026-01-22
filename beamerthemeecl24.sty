@@ -13,10 +13,23 @@
 %% Pour insérer la licence creative commons BY-NC-ND
 \newboolean{@ccbyncnd}
 \setboolean{@ccbyncnd}{false}
+%% Image de fond de la page de garde avec photo
+\newboolean{@p1photo}
+\setboolean{@p1photo}{false}
+%% Dernière page dans le thème défini par l'école centrale de Lyon
+\newboolean{@finecl}
+\setboolean{@finecl}{false}
+%% Le thème n'est disponible qu'au format 4:3 pour l'instant
 
 %% Déclaration des options
 \DeclareOption{ccbyncnd}{
   \setboolean{@ccbyncnd}{true}
+}
+\DeclareOption{p1photo}{
+  \setboolean{@p1photo}{true}
+}
+\DeclareOption{finecl}{
+  \setboolean{@finecl}{true}
 }
 \ProcessOptions\relax
 
@@ -25,17 +38,22 @@
   \begin{tikzpicture}[overlay,remember picture]%
     \ifnumequal{\c@framenumber}{1}{%
       % Page de garde
-      \node[opacity=1, at=(current page.center)] {%
-        \includegraphics[width=\paperwidth,height=\paperheight]{ECL-p1-43.pdf}};%
-    }{%
-      % Autres pages
+      \ifthenelse{\boolean{@p1photo}}{%
+        % Si on veut la page de garde avec photo
+        \node[opacity=1, at=(current page.center)] {%
+          \includegraphics[width=\paperwidth,height=\paperheight]{ECL-p1-43-photo.pdf}};%
+      }{% Sinon
+        \node[opacity=1, at=(current page.center)] {%
+          \includegraphics[width=\paperwidth,height=\paperheight]{ECL-p1-43.pdf}};%
+    }}{%
+      \ifnumequal{\c@framenumber}{\inserttotalframenumber}{%
+        % Si on veut que la dernière page soit aux couleurs de l'école
+        \node[opacity=1, at=(current page.center)] {
+          \includegraphics[width=\paperwidth,height=\paperheight]{ECL-fin-43.pdf}};
+      }{% Autres pages
       \node at (10.2,-0.9) [opacity=1, anchor=west]{%
         \includegraphics[width=2cm]{ECL.png}};%
-    }%
-    % Licence creative commons BY-NC-ND
-    \ifthenelse{\boolean{@ccbyncnd}}{%
-      \node (by) at (current page.north east)[opacity=1, anchor=north east]{%
-        \tiny\insertshortauthor~\includegraphics[width=1cm]{by-nc-nd.png}};}{}%
+    }}%
   \end{tikzpicture}
 }
 
@@ -76,18 +94,25 @@
 
 % Pied de page
 \setbeamertemplate{footline}{%
-  \leavevmode%
-  \hbox{%
-    \begin{beamercolorbox}[wd=.3\paperwidth,left]{section in head/foot}%
-      \hspace*{2ex}\insertshorttitle%
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.4\paperwidth,center]{section in head/foot}%
-      \insertauthor%
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.3\paperwidth,right]{section in head/foot}%
-      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
-  \end{beamercolorbox}}%
-}
+  \ifnumequal{\c@framenumber}{1}{}{%
+    \ifnumequal{\c@framenumber}{\inserttotalframenumber}{}{%
+      \leavevmode%
+      \hbox{%
+        \begin{beamercolorbox}[wd=.3\paperwidth,left]{section in head/foot}%
+          \hspace*{2ex}\insertshorttitle%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.4\paperwidth,center]{section in head/foot}%
+          \ifthenelse{\boolean{@ccbyncnd}}{%
+            % Licence creative commons BY-NC-ND
+            \insertshortauthor~\includegraphics[height=4ex]{by-nc-nd.png}%
+          }{%
+            \insertshortauthor%
+          }%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.3\paperwidth,right]{section in head/foot}%
+          \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+      \end{beamercolorbox}}%
+}}}%
 
 %% Couleurs
 \definecolor{RougeECL}{RGB}{176,16,43}
