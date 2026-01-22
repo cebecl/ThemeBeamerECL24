@@ -46,6 +46,6 @@ N'oubliez pas d'ajouter une page vide en fin de présentation :
 ```
 
 ## Exemple de présentation
-Vous pouvez tester le thème *ecl24* avec le fichier [presentation.tex](https://github.com/cebecl/ThemeBeamerECL24/blob/main/presentation.tex).
+Vous pouvez tester le thème *ecl24* avec le fichier [presentation.tex](https://github.com/cebecl/ThemeBeamerECL24/blob/main/presentation.tex). Le rendu après compilation avec *lualatex* est le fichier [presentation.pdf](https://github.com/cebecl/ThemeBeamerECL24/blob/main/presentation.pdf).
 
 Cet exemple utilise [*lualetex*](https://www.luatex.org/), mais vous pouvez utiliser simplement *latex* ou *pdflatex* en commentant la ligne `\usepackage{luatextra}`
