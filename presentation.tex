@@ -1,5 +1,6 @@
+%% Exemple d'utilisation du thème ecl24 pour réaliser une présentation au format 4:3
 \documentclass[9pt]{beamer}
-\usepackage{luatextra}
+\usepackage{luatextra} % facultatif, uniquement si vous utilisez lualatex à la place de latex ou pdflatex
 
 %% Modules nécessaires pour utiliser le thème ecl24
 \usepackage{tikz}
@@ -7,6 +8,9 @@
 \graphicspath{{IMAGES/}}
 
 %% Pour utiliser le thème ecl24
+% l'option ccbyncnd permet d'inclure la licence creative commons BY-NC-ND
+% l'option p1photo  change le fond de la page de garde en ajoutant une photo
+% l'option finecl   met la dernière page de la présentation dans le thème de l'école
 \usetheme[ccbyncnd]{ecl24}
 
 %% Afin de supprimer les symbols de navigation Beamer
@@ -17,7 +21,7 @@
 %% Informations utilies pour la page de garde et les pieds de page
 \title{Thème Beamer Latex de l'école centrale de Lyon}
 \subtitle{Charte graphique de l'école centrale de Lyon 2024}
-\author[Dr Bichot]{Dr Charles-Edmond Bichot} % shortauthor est utilisé pour ccbyncnd
+\author[Dr Charles-Edmond \textsc{Bichot}]{Dr Charles-Edmond \textsc{Bichot}\\\href{mailto:charles-edmond.bichot@ec-lyon.fr}{charles-edmond.bichot@ec-lyon.fr}\\Maître de conférences à l'école centrale de Lyon} % shortauthor est utilisé pour ccbyncnd
 \institute{École centrale de Lyon}
 \date{22 janvier 2026}
 
@@ -47,15 +51,49 @@
 \end{frame}
 
 
-\section{Licence creative commons BY-NC-ND}
+\subsection{Licence creative commons BY-NC-ND}
 
-\begin{frame}[fragile]{\insertsection}
+\begin{frame}[fragile]{\insertsection}{\insertsubsection}
   %% Bloc normal
   \begin{block}{Utiliser la licence creative commons BY-NC-ND}
     Pour utiliser la licence creative commons BY-NC-ND, activez l'option \emph{ccbyncnd} en appelant le thème \emph{ecl24} :
 
     \verb+\usetheme[ccbyncnd]{ecl24}+
   \end{block}
+\end{frame}
+
+\subsection{Image de fond de la page de garde avec photo}
+
+\begin{frame}[fragile]{\insertsection}{\insertsubsection}
+  %% Bloc normal
+  \begin{block}{Utiliser l'image de fond dans la page de garde}
+    Pour utiliser que la page de garde soit celle avec une photo, activez l'option \emph{p1photo} en appelant le thème \emph{ecl24} :
+
+    \verb+\usetheme[p1photo]{ecl24}+
+
+    Avec la licence creative commons BY-NC-ND :
+
+    \verb+\usetheme[ccbyncnd,p1photo]{ecl24}+
+\end{block}
+\end{frame}
+
+\subsection{Dernière page dans le thème défini par l'école centrale de Lyon}
+
+\begin{frame}[fragile]{\insertsection}{\insertsubsection}
+  %% Bloc normal
+  \begin{block}{Utiliser le thème de l'école pour la dernière page}
+    Pour utiliser le thème de l'école centrale de Lyon dans la dernière, activez l'option \emph{finecl} en appelant le thème \emph{ecl24} :
+
+    \verb+\usetheme[finecl]{ecl24}+
+
+    Avec la licence creative commons BY-NC-ND :
+
+    \verb+\usetheme[ccbyncnd,finecl]{ecl24}+
+  \end{block}
+\end{frame}
+
+%% Page vide pour la dernière page du thème de l'école
+\begin{frame}
 \end{frame}
 
 \end{document}
