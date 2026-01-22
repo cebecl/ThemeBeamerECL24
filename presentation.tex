@@ -11,7 +11,7 @@
 % l'option ccbyncnd permet d'inclure la licence creative commons BY-NC-ND
 % l'option p1photo  change le fond de la page de garde en ajoutant une photo
 % l'option finecl   met la dernière page de la présentation dans le thème de l'école
-\usetheme[ccbyncnd]{ecl24}
+\usetheme[ccbyncnd,finecl]{ecl24}
 
 %% Afin de supprimer les symbols de navigation Beamer
 \beamertemplatenavigationsymbolsempty
@@ -71,7 +71,7 @@
 
     \verb+\usetheme[p1photo]{ecl24}+
 
-    Avec la licence creative commons BY-NC-ND :
+    Avec en plus la licence creative commons BY-NC-ND :
 
     \verb+\usetheme[ccbyncnd,p1photo]{ecl24}+
 \end{block}
@@ -82,13 +82,15 @@
 \begin{frame}[fragile]{\insertsection}{\insertsubsection}
   %% Bloc normal
   \begin{block}{Utiliser le thème de l'école pour la dernière page}
-    Pour utiliser le thème de l'école centrale de Lyon dans la dernière, activez l'option \emph{finecl} en appelant le thème \emph{ecl24} :
-
+    Pour utiliser le thème de l'école centrale de Lyon dans la dernière, activez l'option \emph{finecl} en appelant le thème \emph{ecl24} :\\
     \verb+\usetheme[finecl]{ecl24}+
 
-    Avec la licence creative commons BY-NC-ND :
-
+    Avec en plus la licence creative commons BY-NC-ND :\\
     \verb+\usetheme[ccbyncnd,finecl]{ecl24}+
+
+    N'oubliez pas d'ajouter une page vide en fin de présentation :\\
+    \verb+\begin{frame}+\\
+    \verb+\end{frame}+
   \end{block}
 \end{frame}
 
