@@ -20,6 +20,31 @@ Pour utiliser la licence creative commons BY-NC-ND, activez l'option *ccbyncnd* 
 \usetheme[ccbyncnd]{ecl24}
 ```
 
+### Option page de garde avec photo
+Pour utiliser que la page de garde soit celle avec une photo, activez l'option *p1photo* en appelant le thème *ecl24* :
+```latex
+\usetheme[p1photo]{ecl24}
+```
+Avec en plus la licence creative commons BY-NC-ND :
+```latex
+\usetheme[ccbyncnd,p1photo]{ecl24}
+```
+
+### Option dernière page dans le thème *ecl24*
+Pour utiliser le thème de l'école centrale de Lyon dans la dernière, activez l'option *finecl* en appelant le thème *ecl24* :
+```latex
+\usetheme[finecl]{ecl24}
+```
+Avec en plus la licence creative commons BY-NC-ND :
+```latex
+\usetheme[ccbyncnd,finecl]{ecl24}
+```
+N'oubliez pas d'ajouter une page vide en fin de présentation :
+```latex
+\begin{frame}
+\end{frame}
+```
+
 ## Exemple de présentation
 Vous pouvez tester le thème *ecl24* avec le fichier [presentation.tex](https://github.com/cebecl/ThemeBeamerECL24/blob/main/presentation.tex).
 
